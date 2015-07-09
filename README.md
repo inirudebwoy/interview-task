@@ -42,11 +42,16 @@ Specifically, provide results for the following names and date periods, where th
 * Neil between 1957 and 1983
 * Jordan between 1880 and 2010
 
-The script should accept a name and a start and end year as input parameters, e.g.::
+The script should accept a name and a start and end year as input parameters, e.g.
+::
+
   ./scriptName [name] [start year] [end year]
   ./scriptName Billy 1892 2001
 
-So expected behaviour might be:::
+
+So expected behaviour might be:
+::
+
   $ ./scriptName Michael 2004 2009
   Between 2004 and 2009 the average popularity rank of the name Michael was 2.17
 
