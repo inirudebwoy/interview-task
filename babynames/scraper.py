@@ -1,5 +1,6 @@
 from requests import Request, Session
 from bs4 import BeautifulSoup
+import re
 
 
 def get(year):
@@ -26,3 +27,13 @@ def _parse_response(resp):
     Parses the response into a BeautifulSoup object.
     """
     return BeautifulSoup(resp.text)
+
+
+def _extract_names_table(bs):
+    """
+    Returns the names table from the given BeautifulSoup object.
+    """
+    for table in bs.findAll("table"):
+        if re.match(r"^Popularity for top \d+$", table.attrs.get("summary", "")):
+            return table
+    raise ValueError("Unable to find the names table in the given BeautifulSoup object")

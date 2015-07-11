@@ -1,5 +1,6 @@
 import os
 import codecs
+import pytest
 try:
     from unittest.mock import patch
 except ImportError:
@@ -110,3 +111,21 @@ class TestScraper:
         resp._content = self.example_html
         bs = scraper._parse_response(resp)
         assert isinstance(bs, BeautifulSoup)
+
+    def test_extract_names_table_returns_table(self):
+        """
+        _extract_names_table should return the correct BeautifulSoup table element.
+        """
+        resp = Response()
+        resp._content = self.example_html
+        bs = scraper._parse_response(resp)
+        table = scraper._extract_names_table(bs)
+        assert "summary" in table.attrs
+        assert table.attrs["summary"] == "Popularity for top 1000"
+
+    def test_extract_names_table_raises_exception_when_table_doesnt_exist(self):
+        """
+        _extract_names_table should raise a ValueError if it can't find the names table.
+        """
+        with pytest.raises(ValueError):
+            scraper._extract_names_table(BeautifulSoup())
