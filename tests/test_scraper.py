@@ -1,3 +1,5 @@
+import os
+import codecs
 try:
     from unittest.mock import patch
 except ImportError:
@@ -8,9 +10,22 @@ from babynames import scraper
 
 
 LOCAL_URL = "http://127.0.0.1"
+THIS_DIR = os.path.dirname(__file__)
 
 
 class TestScraper:
+
+    _example_html = None
+
+    @property
+    def example_html(self):
+        """
+        Loads the HTML from the example file and returns it as bytes, just as requests like it.
+        """
+        if not self._example_html:
+            with codecs.open(os.path.join(THIS_DIR, "names2014.html"), encoding='utf-8') as f:
+                self._example_html = codecs.encode(f.read())
+        return self._example_html
 
     def test_get_takes_year_arg(self):
         """
@@ -73,3 +88,15 @@ class TestScraper:
         with patch.object(Session, "send", return_value=Response()):
             resp = scraper._perform_request(req)
         assert isinstance(resp, Response)
+
+    def test_perform_request_performs_request_and_gets_data(self):
+        """
+        _perform_request() should perform the request and return a Response object which
+        contains the correct HTML.
+        """
+        req = scraper._create_request(year=2000, url=LOCAL_URL)
+        fake_resp = Response()
+        fake_resp._content = self.example_html
+        with patch.object(Session, "send", return_value=fake_resp):
+            resp = scraper._perform_request(req)
+        assert resp.text == fake_resp.text
