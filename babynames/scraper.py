@@ -1,4 +1,5 @@
 from requests import Request, Session
+from bs4 import BeautifulSoup
 
 
 def get(year):
@@ -18,3 +19,10 @@ def _perform_request(req):
     """
     s = Session()
     return s.send(s.prepare_request(req))
+
+
+def _parse_response(resp):
+    """
+    Parses the response into a BeautifulSoup object.
+    """
+    return BeautifulSoup(resp.text)

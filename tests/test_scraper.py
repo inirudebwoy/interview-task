@@ -6,6 +6,7 @@ except ImportError:
     from mock import patch
 
 from requests import Request, Response, Session
+from bs4 import BeautifulSoup
 from babynames import scraper
 
 
@@ -100,3 +101,12 @@ class TestScraper:
         with patch.object(Session, "send", return_value=fake_resp):
             resp = scraper._perform_request(req)
         assert resp.text == fake_resp.text
+
+    def test_parse_response_returns_beautifulsoup_object(self):
+        """
+        _parse_response should return a BeautifulSoup object.
+        """
+        resp = Response()
+        resp._content = self.example_html
+        bs = scraper._parse_response(resp)
+        assert isinstance(bs, BeautifulSoup)
