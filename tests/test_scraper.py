@@ -1,4 +1,11 @@
+try:
+    from unittest.mock import patch
+except ImportError:
+    from mock import patch
+
+from requests import Request, Response, Session
 from babynames import scraper
+
 
 LOCAL_URL = "http://127.0.0.1"
 
@@ -22,7 +29,7 @@ class TestScraper:
         _create_request() should return a requests.models.Request object.
         """
         req = scraper._create_request(year=2000, url=LOCAL_URL)
-        assert str(type(req)) == "<class 'requests.models.Request'>"
+        assert isinstance(req, Request)
 
     def test_create_request_creates_POST_req(self):
         """
@@ -57,3 +64,12 @@ class TestScraper:
         req = scraper._create_request(year=2000, url=LOCAL_URL, top=500)
         assert "top" in req.data
         assert req.data["top"] == 500
+
+    def test_perform_request_performs_request(self):
+        """
+        _perform_request() should perform the request and return a Response object.
+        """
+        req = scraper._create_request(year=2000, url=LOCAL_URL)
+        with patch.object(Session, "send", return_value=Response()):
+            resp = scraper._perform_request(req)
+        assert isinstance(resp, Response)
