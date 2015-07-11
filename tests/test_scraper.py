@@ -17,7 +17,21 @@ class TestScraper:
         """
         scraper._create_request(year=2000, url=LOCAL_URL)
 
-    def test_create_request_creates_POST_request_with_year_form_variable(self):
+    def test_create_request_creates_request(self):
+        """
+        _create_request() should return a requests.models.Request object.
+        """
+        req = scraper._create_request(year=2000, url=LOCAL_URL)
+        assert str(type(req)) == "<class 'requests.models.Request'>"
+
+    def test_create_request_creates_POST_req(self):
+        """
+        _create_request() should create a POST request.
+        """
+        req = scraper._create_request(year=2000, url=LOCAL_URL)
+        assert req.method == "POST"
+
+    def test_create_request_creates_POST_req_with_year_form_var(self):
         """
         _create_request() should create a POST request which includes a 'year' form variable.
         """
@@ -25,3 +39,21 @@ class TestScraper:
         req = scraper._create_request(year=year, url=LOCAL_URL)
         assert "year" in req.data
         assert req.data["year"] == year
+
+    def test_create_request_creates_POST_req_with_top_form_var_default(self):
+        """
+        _create_request() should create a POST request which includes a 'top' form variable
+        which defaults to 1000.
+        """
+        req = scraper._create_request(year=2000, url=LOCAL_URL)
+        assert "top" in req.data
+        assert req.data["top"] == 1000
+
+    def test_create_request_creates_POST_req_with_top_form_var_set(self):
+        """
+        _create_request() should create a POST request which includes a 'top' form variable
+        which is specifically set to 500.
+        """
+        req = scraper._create_request(year=2000, url=LOCAL_URL, top=500)
+        assert "top" in req.data
+        assert req.data["top"] == 500
