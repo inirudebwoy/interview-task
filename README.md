@@ -1,5 +1,6 @@
 [![Documentation Status](https://readthedocs.org/projects/interview-task/badge/?version=latest)](https://readthedocs.org/projects/interview-task/?badge=latest)
 [![Build Status](https://travis-ci.org/inirudebwoy/interview-task.svg?branch=develop)](https://travis-ci.org/inirudebwoy/interview-task)
+[![Coverage Status](https://coveralls.io/repos/inirudebwoy/interview-task/badge.svg?branch=master&service=github)](https://coveralls.io/github/inirudebwoy/interview-task?branch=master)
 
 Overview
 ========
