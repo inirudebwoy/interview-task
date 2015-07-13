@@ -1,3 +1,4 @@
+from os.path import join, dirname
 try:
     from setuptools import setup
 except ImportError:
@@ -5,6 +6,9 @@ except ImportError:
     use_setuptools()
     from setuptools import setup
 
+
+def read(fname):
+    return open(join(dirname(__file__), fname)).read()
 
 setup(
     name='babynames',
@@ -19,6 +23,7 @@ setup(
     include_package_data=True,
     packages=['babynames'],
     url='https://github.com/inirudebwoy/interview-task',
+    install_requires=read("requirements.txt"),
     classifiers=[
         'Development Status :: 4 - Beta',
         'Environment :: Web Environment',
