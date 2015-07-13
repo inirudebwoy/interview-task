@@ -96,6 +96,6 @@ def _extract_names_from_row(tr):
             # Good, it's not a number!
             continue
         raise TDElementsOutOfOrderError(
-            "TD elements must have been in the wrong order as '%s'"" is not any name I've heard of"
+            "TD elements must have been in the wrong order as '%s' is not any name I've heard of"
             % name)
     return (rank,) + names
