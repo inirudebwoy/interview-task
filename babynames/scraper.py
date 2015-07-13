@@ -67,7 +67,7 @@ def _extract_names_table(bs):
 
 def _extract_name_rows(table):
     """
-    Removes the first and last tr from the table and returns a list of trs.
+    Removes the first and last tr from the table (header and footer) and returns a list of trs.
     """
     return table.findAll("tr")[1:-1]
 
