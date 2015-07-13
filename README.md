@@ -1,6 +1,7 @@
+
 .. image:: https://readthedocs.org/projects/interview-task/badge/?version=latest
-:target: https://readthedocs.org/projects/interview-task/?badge=latest
-:alt: Documentation Status
+   :target: https://readthedocs.org/projects/interview-task/?badge=latest
+   :alt: Documentation Status
 
 
 Overview
