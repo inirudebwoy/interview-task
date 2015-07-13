@@ -1,4 +1,5 @@
 [![Documentation Status](https://readthedocs.org/projects/interview-task/badge/?version=latest)](https://readthedocs.org/projects/interview-task/?badge=latest)
+[![Build Status](https://travis-ci.org/inirudebwoy/interview-task.svg?branch=develop)](https://travis-ci.org/inirudebwoy/interview-task)
 
 Overview
 ========
