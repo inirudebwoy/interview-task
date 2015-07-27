@@ -47,3 +47,9 @@ class TestCacheCommunication:
         for name, rank in dict_one.update(dict_two):
             assert isinstance(name, str)
             assert isinstance(rank, int)
+
+    def test_save_to_cache_no_cache_dir(self):
+        pass
+
+    def test_save_to_cache_with_cache_dir(self):
+        pass
