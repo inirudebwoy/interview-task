@@ -1,3 +1,5 @@
 tox>2.0
 pytest
 bumpversion
+coverage
+pytest-cov
